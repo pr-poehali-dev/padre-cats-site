@@ -2,8 +2,17 @@ import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import Icon from '@/components/ui/icon';
+import { useScrollAnimation } from '@/hooks/useScrollAnimation';
 
 export default function Index() {
+  const heroLeft = useScrollAnimation();
+  const heroRight = useScrollAnimation();
+  const aboutTitle = useScrollAnimation();
+  const aboutCards = useScrollAnimation();
+  const contactsTitle = useScrollAnimation();
+  const contactsCards = useScrollAnimation();
+  const socialButtons = useScrollAnimation();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-padre-navy via-padre-navy to-padre-blue">
       {/* Navigation */}
@@ -21,7 +30,10 @@ export default function Index() {
       <section className="pt-24 pb-12 px-6">
         <div className="container mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
-            <div className="space-y-8">
+            <div 
+              ref={heroLeft.ref as React.RefObject<HTMLDivElement>}
+              className={`space-y-8 transition-all duration-700 ${heroLeft.isVisible ? 'animate-fade-in-left' : 'opacity-0 translate-x-[-30px]'}`}
+            >
               <div className="space-y-4">
                 <h1 className="text-6xl lg:text-8xl font-black text-padre-white leading-none">
                   PADRE
@@ -59,7 +71,10 @@ export default function Index() {
               </div>
             </div>
             
-            <div className="relative">
+            <div 
+              ref={heroRight.ref as React.RefObject<HTMLDivElement>}
+              className={`relative transition-all duration-700 delay-300 ${heroRight.isVisible ? 'animate-fade-in-right' : 'opacity-0 translate-x-[30px]'}`}
+            >
               <div className="relative w-full max-w-md mx-auto">
                 <div className="absolute inset-0 bg-gradient-to-r from-padre-orange to-padre-blue rounded-3xl blur-2xl opacity-30 scale-110"></div>
                 <img 
@@ -80,12 +95,18 @@ export default function Index() {
       <section id="about" className="py-20 px-6 bg-padre-white/5 backdrop-blur-lg">
         <div className="container mx-auto">
           <div className="max-w-4xl mx-auto">
-            <h2 className="text-5xl font-black text-center text-padre-white mb-16">
+            <h2 
+              ref={aboutTitle.ref as React.RefObject<HTMLHeadingElement>}
+              className={`text-5xl font-black text-center text-padre-white mb-16 transition-all duration-700 ${aboutTitle.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-[30px]'}`}
+            >
               О <span className="text-padre-orange">PADRE</span>
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-8">
-              <Card className="bg-padre-navy/50 border-padre-blue/30 backdrop-blur-lg">
+            <div 
+              ref={aboutCards.ref as React.RefObject<HTMLDivElement>}
+              className={`grid md:grid-cols-2 gap-8 transition-all duration-700 delay-200 ${aboutCards.isVisible ? 'animate-scale-in' : 'opacity-0 scale-90'}`}
+            >
+              <Card className="bg-padre-navy/50 border-padre-blue/30 backdrop-blur-lg hover:scale-105 transition-transform duration-300">
                 <CardContent className="p-8">
                   <div className="flex items-center gap-4 mb-4">
                     <Icon name="Zap" className="text-padre-orange" size={32} />
@@ -98,7 +119,7 @@ export default function Index() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-padre-navy/50 border-padre-blue/30 backdrop-blur-lg">
+              <Card className="bg-padre-navy/50 border-padre-blue/30 backdrop-blur-lg hover:scale-105 transition-transform duration-300">
                 <CardContent className="p-8">
                   <div className="flex items-center gap-4 mb-4">
                     <Icon name="Building" className="text-padre-orange" size={32} />
@@ -111,7 +132,7 @@ export default function Index() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-padre-navy/50 border-padre-blue/30 backdrop-blur-lg">
+              <Card className="bg-padre-navy/50 border-padre-blue/30 backdrop-blur-lg hover:scale-105 transition-transform duration-300">
                 <CardContent className="p-8">
                   <div className="flex items-center gap-4 mb-4">
                     <Icon name="Target" className="text-padre-orange" size={32} />
@@ -124,7 +145,7 @@ export default function Index() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-padre-navy/50 border-padre-blue/30 backdrop-blur-lg">
+              <Card className="bg-padre-navy/50 border-padre-blue/30 backdrop-blur-lg hover:scale-105 transition-transform duration-300">
                 <CardContent className="p-8">
                   <div className="flex items-center gap-4 mb-4">
                     <Icon name="Rocket" className="text-padre-orange" size={32} />
@@ -145,12 +166,18 @@ export default function Index() {
       <section id="contacts" className="py-20 px-6">
         <div className="container mx-auto">
           <div className="max-w-3xl mx-auto text-center">
-            <h2 className="text-5xl font-black text-padre-white mb-16">
+            <h2 
+              ref={contactsTitle.ref as React.RefObject<HTMLHeadingElement>}
+              className={`text-5xl font-black text-padre-white mb-16 transition-all duration-700 ${contactsTitle.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-[30px]'}`}
+            >
               <span className="text-padre-orange">КОНТАКТЫ</span>
             </h2>
             
-            <div className="grid md:grid-cols-2 gap-8 mb-12">
-              <Card className="bg-gradient-to-br from-padre-orange to-padre-blue p-1 rounded-2xl">
+            <div 
+              ref={contactsCards.ref as React.RefObject<HTMLDivElement>}
+              className={`grid md:grid-cols-2 gap-8 mb-12 transition-all duration-700 delay-200 ${contactsCards.isVisible ? 'animate-scale-in' : 'opacity-0 scale-90'}`}
+            >
+              <Card className="bg-gradient-to-br from-padre-orange to-padre-blue p-1 rounded-2xl hover:scale-105 transition-transform duration-300">
                 <CardContent className="bg-padre-navy rounded-xl p-8 h-full">
                   <Icon name="Globe" className="text-padre-orange mx-auto mb-4" size={48} />
                   <h3 className="text-2xl font-bold text-padre-white mb-4">Биржа padre.gg</h3>
@@ -163,7 +190,7 @@ export default function Index() {
                 </CardContent>
               </Card>
 
-              <Card className="bg-gradient-to-br from-padre-blue to-padre-turquoise p-1 rounded-2xl">
+              <Card className="bg-gradient-to-br from-padre-blue to-padre-turquoise p-1 rounded-2xl hover:scale-105 transition-transform duration-300">
                 <CardContent className="bg-padre-navy rounded-xl p-8 h-full">
                   <Icon name="MessageSquare" className="text-padre-blue mx-auto mb-4" size={48} />
                   <h3 className="text-2xl font-bold text-padre-white mb-4">Прямая связь</h3>
@@ -177,16 +204,19 @@ export default function Index() {
               </Card>
             </div>
 
-            <div className="flex justify-center gap-6">
-              <Button variant="outline" size="lg" className="border-padre-orange text-padre-orange hover:bg-padre-orange hover:text-padre-navy rounded-full">
+            <div 
+              ref={socialButtons.ref as React.RefObject<HTMLDivElement>}
+              className={`flex justify-center gap-6 transition-all duration-700 delay-400 ${socialButtons.isVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-[30px]'}`}
+            >
+              <Button variant="outline" size="lg" className="border-padre-orange text-padre-orange hover:bg-padre-orange hover:text-padre-navy rounded-full hover:scale-110 transition-all duration-300">
                 <Icon name="Twitter" className="mr-2" />
                 Twitter
               </Button>
-              <Button variant="outline" size="lg" className="border-padre-blue text-padre-blue hover:bg-padre-blue hover:text-white rounded-full">
+              <Button variant="outline" size="lg" className="border-padre-blue text-padre-blue hover:bg-padre-blue hover:text-white rounded-full hover:scale-110 transition-all duration-300">
                 <Icon name="Send" className="mr-2" />
                 Telegram
               </Button>
-              <Button variant="outline" size="lg" className="border-padre-turquoise text-padre-turquoise hover:bg-padre-turquoise hover:text-padre-navy rounded-full">
+              <Button variant="outline" size="lg" className="border-padre-turquoise text-padre-turquoise hover:bg-padre-turquoise hover:text-padre-navy rounded-full hover:scale-110 transition-all duration-300">
                 <Icon name="Mail" className="mr-2" />
                 Email
               </Button>
